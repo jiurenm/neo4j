@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+package com.kid.neo4j.rpc;
+
+message Input {
+    string name = 1;
+}
+
+message Req {
+    string name = 1;
+    string relationship = 2;
+}
+
+message Output {
+    repeated Result result = 1;
+}
+
+message Result {
+    int64 id = 1;
+    string name = 2;
+    string info = 3;
+}
+
+service GraphService {
+    rpc findByName (Input) returns (Result);
+    rpc findCauseByName(Input) returns (Output);
+    rpc findDiagnosisByName(Input) returns (Output);
+    rpc findHarmByName(Input) returns (Output);
+    rpc findNoteByName(Input) returns (Output);
+    rpc findPreventionByName(Input) returns (Output);
+    rpc findSymptomByName(Input) returns (Output);
+    rpc findTreatmentByName(Input) returns (Output);
+    rpc find(Req) returns (Output);
+}
